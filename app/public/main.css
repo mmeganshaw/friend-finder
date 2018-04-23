@@ -1,0 +1,58 @@
+#mainbackground {
+	background-image: url("friend-finder-background.png");
+	background-color: #ffbd4a;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+
+H1 {
+	font-family: 'Roboto', sans-serif;
+	color: white;
+	font-size: 120px;
+	font-weight: bold;
+	
+}
+
+H1:hover {
+  transition: all 0.2s linear;
+  transform: translate(0,15px);
+}
+
+H2 {
+	color: white;
+
+}
+H2:hover {
+  transition: all 0.2s linear;
+  transform: translate(0,15px);
+}
+
+H3 {
+	margin-top: 30px;
+	color: white;
+}
+
+H3:hover {
+  transition: all 0.2s linear;
+  transform: translate(0,15px);
+}
+
+H4 {
+	color: #ffbd4a;
+}
+
+i {
+	margin-right: 5px;
+	margin-top: 200px;
+	font-size: 62px;
+	color: white;
+
+}
+
+i:hover {
+  transition: all 0.2s linear;
+  transform: translate(0,15px);
+}
