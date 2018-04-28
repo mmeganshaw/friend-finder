@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 
 
-const PORT = 3000;
+const PORT = process.env.PORT || 8080;
 
 // create express application
 var app = express();
