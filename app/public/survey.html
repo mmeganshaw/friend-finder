@@ -32,7 +32,7 @@
                 <label class='active' for="name">Link to Photo Image (required)</label>
                 <h5><strong>Question 1</strong></h5>
                 <p>I see myself as extroverted, enthusiastic.</p>
-                <select data-placeholder="" class="browser-default" id="q1">
+                <select class="browser-default" id="q1">
                     <option value="">Choose an option</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -42,7 +42,7 @@
                 </select>
                 <h5><strong>Question 2</strong></h5>
                 <p>I see myself as critical, quarrelsome.</p>
-                <select data-placeholder="" class="browser-default" id="q2">
+                <select class="browser-default" id="q2">
                     <option value="">Choose an option</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -52,7 +52,7 @@
                 </select>
                 <h5><strong>Question 3</strong></h5>
                 <p>I see myself as dependable, self-disciplined.</p>
-                <select data-placeholder="" class="browser-default" id="q3">
+                <select class="browser-default" id="q3">
                     <option value="">Choose an option</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -62,7 +62,7 @@
                 </select>
                 <h5><strong>Question 4</strong></h5>
                 <p>I see myself as anxious, easily upset.</p>
-                <select data-placeholder="" class="browser-default" id="q4">
+                <select class="browser-default" id="q4">
                     <option value="">Choose an option</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -72,7 +72,7 @@
                 </select>
                 <h5><strong>Question 5</strong></h5>
                 <p>I see myself as open to new experiences.</p>
-                <select data-placeholder="" class="browser-default" id="q5">
+                <select class="browser-default" id="q5">
                     <option value="">Choose an option</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -82,7 +82,7 @@
                 </select>
                 <h5><strong>Question 6</strong></h5>
                 <p>I see myself as reserved, quiet</p>
-                <select data-placeholder="" class="browser-default" id="q6">
+                <select class="browser-default" id="q6">
                     <option value="">Choose an Option</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -92,7 +92,7 @@
                 </select>
                 <h5><strong>Question 7</strong></h5>
                 <p>I see myself as sympathetic.</p>
-                <select data-placeholder="" class="browser-default" id="q7">
+                <select class="browser-default" id="q7">
                     <option value="">Choose an option</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -102,7 +102,7 @@
                 </select>
                 <h5><strong>Question 8</strong></h5>
                 <p>I see myself as disorganized.</p>
-                <select data-placeholder="" class="browser-default" id="q8">
+                <select class="browser-default" id="q8">
                     <option value="">Choose an option</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -112,7 +112,7 @@
                 </select>
                 <h5><strong>Question 9</strong></h5>
                 <p>I see myself as calm, emotionally stable.</p>
-                <select data-placeholder="" class="browser-default" id="q9">
+                <select class="browser-default" id="q9">
                     <option value="">Choose an option</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -122,7 +122,7 @@
                 </select>
                 <h5><strong>Question 10</strong></h5>
                 <p>I see myself as practical, conventional.</p>
-                <select data-placeholder="" class="browser-default" id="q10">
+                <select class="browser-default" id="q10">
                     <option value="">Choose an option</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -132,7 +132,8 @@
                 </select>
                 <br>
                 <!-- Materialize Modal Trigger/Submit Button -->
-                <button type ="submit" data-target="modal1" class="waves-effect waves-light btn modal-trigger cyan lighten-1" id="submitBtn">Submit</button>
+                <a href="survey.html" id="submitButton" class="btn-floating btn-large waves-effect waves-light orange">submit<i class="material-icons"></i></a>
+    
             </div>
         </div>
         <div class='col s4'>
@@ -143,8 +144,8 @@
         <div id="modal1" class="modal">
           <div class="modal-content">
             <h4>Meet Your New BFF</h4>
-            <h5 id="matchName"></h5>
-            <img id="matchPic" src="" alt="No Image" width = 250px>
+            <h5 id="userMatch"></h5>
+            <img id="userMatchImage" src="" alt="No Image" width = "250px">
           </div>
         <div class="modal-footer">
           <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Done</a>
@@ -155,6 +156,58 @@
 
 <!-- Grabs information and sends it to server -->
 <script type="text/javascript">
+$(document).ready(function() {
+    $('select').material_select();
+  
+    $('modal1').modal({
+        dismissible: false, // Modal can be dismissed by clicking outside of the modal
+        pacity: .5, // Opacity of modal background
+        inDuration: 300, // Transition in duration
+        outDuration: 200, // Transition out duration
+        startingTop: '4%', // Starting top style attribute
+        endingTop: '10%' // Ending top style attribute
+
+    });
+
+  });
+
+$('#submitButton').on('click', function(event) {
+    event.preventDefault();
+
+    console.log("is this working;")
+
+    var userInput = {
+        name: $('#name').val().trim(),
+        photo: $('#photo').val().trim(),
+        scores:[
+                    $('#q1').val().trim(),
+                    $('#q2').val().trim(),
+                    $('#q3').val().trim(),
+                    $('#q4').val().trim(),
+                    $('#q5').val().trim(),
+                    $('#q6').val().trim(),
+                    $('#q7').val().trim(),
+                    $('#q8').val().trim(),
+                    $('#q9').val().trim(),
+                    $('#q10').val().trim()
+                ]
+
+    };
+
+    console.log(userInput);
+
+    $.post("/api/friends", userInput).done(function(data) {
+
+        $('#userMatch').html(data.matchName);
+    //     $("#userMatchImage").attr("src", data.matchImage);
+                
+        $('#modal1').modal('open');
+
+
+    });
+
+});
+
 </script>
 </body>
 
