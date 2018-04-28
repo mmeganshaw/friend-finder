@@ -1,24 +1,21 @@
-var express = require('express');
-var path = require('path');
+var express = require('express')
+var app = express()
+var bodyParser = require('body-parser')
+var path = require('path')
 
+var PORT = 5000;
 
-const PORT = process.env.PORT || 8080;
+// respond with "hello world" when a GET request is made to the homepage
 
-// create express application
-var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.text());
+app.use(bodyParser.json({type:'application/vnd.api+json'}));
+app.use(express.static(__dirname + '/style'));
 
-app.get("/", function(req, res) {
-	res.send("home page");
+require('./app/routing/htmlRoutes.js')(app);
+require('./app/routing/apiRoutes.js')(app);
+
+app.listen(PORT, function(){
+	console.log("Server listening on: " + PORT);
 });
-
-app.get("/hello", function(req, res) {
-	res.send("hello world!");
-});
-
-app.get("/api/friends" function(req, res) {
-	res.send()
-});
-
-app.listen(PORT, function () {
-	console.log("App listening on port: " + PORT);
-}); 

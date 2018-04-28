@@ -1,13 +1,18 @@
+var express = require('express');
 var path = require('path');
 
+var app = express();
+
 module.exports = function(app){
-  //default GET route to the survey page
+  //survey page
   app.get('/survey', function (req, res) {
     res.sendFile(path.join(__dirname + '/../public/survey.html'));
   });
 
   //route to the home page
-  app.use(function (req, res) {
+  app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/../public/home.html'));
   });
+  
+  
 };
