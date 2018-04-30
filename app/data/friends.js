@@ -31,6 +31,5 @@ var friendData = [
       '1']
   }
 ];
-console.log("friendsjs is loaded");
 
 module.exports = friendData;

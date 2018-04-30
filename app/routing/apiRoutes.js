@@ -4,6 +4,8 @@ var friends = require('../data/friends');
 
 var app = express();
 
+var totalDifference = 0;
+
 module.exports = function(app){
   //survey page
   app.get('/api/friends', function (req, res) {

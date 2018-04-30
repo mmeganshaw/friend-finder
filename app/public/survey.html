@@ -26,10 +26,10 @@
             <div class='card-panel left-align white'>
                 <h5><strong>About You</strong></h5>
                 <br>
-                <input id="name" type="text" class="validate" required>
-                <label class='active' for="name">Name (required)</label>
-                <input id="photo" type="text" class="validate" required>
-                <label class='active' for="name">Link to Photo Image (required)</label>
+                <input id="name">
+                <label>Name (required)</label>
+                <input id="photo">
+                <label>Link to Photo Image (required)</label>
                 <h5><strong>Question 1</strong></h5>
                 <p>I see myself as extroverted, enthusiastic.</p>
                 <select class="browser-default" id="q1">
@@ -132,8 +132,8 @@
                 </select>
                 <br>
                 <!-- Materialize Modal Trigger/Submit Button -->
-                <a href="survey.html" id="submitButton" class="btn-floating btn-large waves-effect waves-light orange">submit<i class="material-icons"></i></a>
-    
+                <!-- <a id="submitButton" class="btn-floating btn-large waves-effect waves-light orange">submit<i class="material-icons"></i></a> -->
+                <button type ="submit" data-target="modal1" class="waves-effect waves-light btn modal-trigger cyan lighten-1" id="submitButton">Submit</button>
             </div>
         </div>
         <div class='col s4'>
@@ -159,7 +159,7 @@
 $(document).ready(function() {
     $('select').material_select();
   
-    $('modal1').modal({
+    $('#modal1').modal({
         dismissible: false, // Modal can be dismissed by clicking outside of the modal
         pacity: .5, // Opacity of modal background
         inDuration: 300, // Transition in duration
@@ -174,38 +174,76 @@ $(document).ready(function() {
 $('#submitButton').on('click', function(event) {
     event.preventDefault();
 
-    console.log("is this working;")
-
-    var userInput = {
+    // console.log("this is working");
+    var newUser = {
         name: $('#name').val().trim(),
         photo: $('#photo').val().trim(),
-        scores:[
-                    $('#q1').val().trim(),
-                    $('#q2').val().trim(),
-                    $('#q3').val().trim(),
-                    $('#q4').val().trim(),
-                    $('#q5').val().trim(),
-                    $('#q6').val().trim(),
-                    $('#q7').val().trim(),
-                    $('#q8').val().trim(),
-                    $('#q9').val().trim(),
-                    $('#q10').val().trim()
-                ]
+        scores: [
+        $('#q1').val().trim(),
+        $('#q2').val().trim(),
+        $('#q3').val().trim(),
+        $('#q4').val().trim(),
+        $('#q5').val().trim(),
+        $('#q6').val().trim(),
+        $('#q7').val().trim(),
+        $('#q8').val().trim(),
+        $('#q9').val().trim(),
+        $('#q10').val().trim()
 
+        ]
     };
+    // console.log(newUser);
+    
+     var currentURL = window.location.origin; 
+    
+    $.ajax({
+        url: currentURL + "/api/friends",
+        method: "GET"
+    }).then(function(friendData) {
+        var friendDifferences = [];
+        var winner = 50;
+        var scoresArray = [];
+        var scoresDiff = []; 
+        // console.log(firstArray);     
+    
+        // console.log(friendData[0].scores)
+        // console.log(newUser.scores);
 
-    console.log(userInput);
+        for (var i =0; i < friendData.length; i++) {
+            // console.log(friendData[i].scores);
+            var currentFriendScore = 0;
+            for (var j = 0; j < friendData[i].scores.length; j++) {
+                // console.log(friendData[i].scores[j])
+                currentFriendScore += Math.abs(newUser.scores[j] - friendData[i].scores[j]);
+                    // console.log(currentFriendScore);
+            };
+       
+            friendDifferences[i] = currentFriendScore; 
 
-    $.post("/api/friends", userInput).done(function(data) {
-
-        $('#userMatch').html(data.matchName);
-    //     $("#userMatchImage").attr("src", data.matchImage);
-                
-        $('#modal1').modal('open');
-
+            if (i > 0 ) {
+                if (friendDifferences[i] < winner) {
+                    winner = friendDifferences[i];
+                }
+            }
+        }
+        
+        var newMatchName = friendData[friendDifferences.indexOf(winner)].name;
+        var newMatchPhoto = friendData[friendDifferences.indexOf(winner)].photo;
+    
+        console.log(newMatchName);
+        console.log(newMatchPhoto);
+        $('#userMatch').text(newMatchName);
+        $('#userMatchImage').attr("src", newMatchPhoto);
+        $('#modal1').modal();
 
     });
 
+    var stringUser = JSON.stringify(newUser);
+    $.post("/api/friends", stringUser, function(data) {
+                //Grab the result from the AJAX post so that the best match's name and photo are displayed.
+                console.log("Posted data: " + stringUser);
+            });
+    
 });
 
 </script>

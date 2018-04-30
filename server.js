@@ -1,9 +1,11 @@
+// Sets package requirements
 var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
 var path = require('path')
 
-var PORT = 5000;
+// Setting port to 5000 for heroku
+var PORT = process.env.PORT || 8080;
 
 // respond with "hello world" when a GET request is made to the homepage
 
