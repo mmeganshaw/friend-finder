@@ -1,4 +1,4 @@
-Title: "FriendFinder" application 
+## "FriendFinder" application 
 
 - basically a dating app. 
 
