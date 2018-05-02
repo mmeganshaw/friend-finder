@@ -1,13 +1,16 @@
 ## "FriendFinder" application 
 
-- basically a dating app. 
+Basically a dating app. 
 
 This full-stack site will take in results from your users' surveys, then compare their answers with those from other users. The app will then display the name and picture of the user with the best overall match.
 
 When the user submits the survey, they are matched with a "friend" that has the closest match to their personality. 
 
-# Screen Shots
+# Live Site
 
+https://ms-friend-finder.herokuapp.com/
+
+# Screen Shots
 
 ![Screen shot](ss2.png)
 Index Page
