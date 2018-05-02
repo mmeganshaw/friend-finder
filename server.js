@@ -5,7 +5,7 @@ var bodyParser = require('body-parser')
 var path = require('path')
 
 // Setting port to 5000 for heroku
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 5000;
 
 // respond with "hello world" when a GET request is made to the homepage
 

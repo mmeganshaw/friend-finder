@@ -13,7 +13,8 @@ module.exports = function(app){
     });
 
   app.post('/api/friends', function(req, res){
-    res.render(req.body)
+    // res.render(req.body)
+    friends.push(req.body);
     });
 
 };
